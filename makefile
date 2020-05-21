@@ -157,12 +157,13 @@ endif
 # Render fonts using the freetype library and use the fontconfig library to
 # find font files.
 GLVIS_USE_FREETYPE ?= YES
+GLVIS_FONT_SIZE = 12
 # libfreetype + libfontconfig
 # get cflags with: freetype-config --cflags  or  pkg-config freetype2 --cflags
 # get libs with:   freetype-config --libs    or  pkg-config freetype2 --libs
 # libfontconfig:   pkg-config fontconfig --cflags
 #                  pkg-config fontconfig --libs
-FT_OPTS = -DGLVIS_USE_FREETYPE -I$(X11_DIR)/include/freetype2
+FT_OPTS = -DGLVIS_USE_FREETYPE -DGLVIS_FONT_SIZE=$(GLVIS_FONT_SIZE) -I$(X11_DIR)/include/freetype2
 FT_LIBS = -lfreetype -lfontconfig
 ifeq ($(GLVIS_USE_FREETYPE),YES)
    GLVIS_FLAGS += $(FT_OPTS)

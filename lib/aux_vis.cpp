@@ -2149,7 +2149,11 @@ const char *fc_font_patterns[] =
 
 const int num_font_patterns = sizeof(fc_font_patterns)/sizeof(char *);
 
+#ifdef GLVIS_FONT_SIZE
+int font_size = GLVIS_FONT_SIZE;
+#else
 int font_size = 12;
+#endif
 
 GLVisFont glvis_font;
 
