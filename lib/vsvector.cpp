@@ -237,7 +237,7 @@ void VisualizationSceneVector::ToggleDrawElems()
 
 void VisualizationSceneVector::ToggleVectorField()
 {
-   drawvector = (drawvector+1)%4;
+   drawvector = (drawvector+1)%6;
    PrepareVectorField();
 }
 
@@ -844,7 +844,7 @@ double new_maxlen;
 void VisualizationSceneVector::DrawVector(double px, double py, double vx,
                                           double vy, double cval)
 {
-   double zc = 0.5*(z[0]+z[1]);
+   double zc = (drawvector > 3)?(z[1]):(0.5*(z[0]+z[1]));
 
    if (drawvector == 1)
    {
@@ -860,9 +860,16 @@ void VisualizationSceneVector::DrawVector(double px, double py, double vx,
       arrow_type = 1;
       arrow_scaling_type = 1;
 
-      MySetColor(cval, minv, maxv);
+      if (drawvector > 3)
+      {
+         MySetColor(0.);
+      }
+      else
+      {
+         MySetColor(cval, minv, maxv);
+      }
 
-      if (drawvector == 2)
+      if (drawvector == 2 || drawvector == 4)
       {
          Arrow(px, py, zc, vx, vy, 0.0, h, 0.125);
       }
@@ -893,7 +900,7 @@ void VisualizationSceneVector::PrepareVectorField()
          int i;
 
          MySetColorLogscale = logscale;
-         if (drawvector == 3)
+         if (drawvector == 3 || drawvector == 5)
          {
             new_maxlen = 0.0;
          }
@@ -940,7 +947,7 @@ void VisualizationSceneVector::PrepareVectorField()
             }
          }
 
-         if (drawvector == 3 && new_maxlen != maxlen)
+         if ((drawvector == 3 || drawvector == 5) && new_maxlen != maxlen)
          {
             maxlen = new_maxlen;
             rerun = 1;

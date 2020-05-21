@@ -195,6 +195,10 @@ v - Toggle the "vector" state (uses vector subdivision factor, accept u/U)
                         "vector-to-scalar function", see keys u/U)
                      -> show vector field as above, but the vectors are scaled
                         proportionally to their magnitude
+                     -> show vector field; vectors are uniformly scaled;
+                        the color is from the beggining of the colormap
+                     -> show vector field as above, but the vectors are scaled
+                        proportionally to their magnitude
 V - Change the scaling of the vectors relative to the default
 
 d - Toggle the "displaced mesh" state: (see also keys 'n'/'b')
