@@ -697,15 +697,18 @@ int VisualizationSceneSolution::GetRefinedValuesAndNormals(
 
    if (drawelems < 2)
    {
-      rsol->GetGradients(i, ir, tr);
-      normals.SetSize(3, tr.Width());
-      for (int j = 0; j < tr.Width(); j++)
+      if (rsol->FESpace()->GetFE(i)->GetMapType() == FiniteElement::VALUE)
       {
-         normals(0, j) = -tr(0, j);
-         normals(1, j) = -tr(1, j);
-         normals(2, j) = 1.;
+         rsol->GetGradients(i, ir, tr);
+         normals.SetSize(3, tr.Width());
+         for (int j = 0; j < tr.Width(); j++)
+         {
+            normals(0, j) = -tr(0, j);
+            normals(1, j) = -tr(1, j);
+            normals(2, j) = 1.;
+         }
+         have_normals = 1;
       }
-      have_normals = 1;
       rsol->GetValues(i, ir, vals, tr);
    }
    else
